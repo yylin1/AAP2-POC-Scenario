@@ -82,12 +82,10 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 ![](img/05.png)
 
-### 展示<1>
+### 展示<1>- 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表
 > 實際展示影片 (請打開`字幕`)
 
 [![展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表](https://img.youtube.com/vi/XPlo67IBtQw/0.jpg)](https://www.youtube.com/watch?v=XPlo67IBtQw "展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表")
-
-{{< youtube qTY95XwzhzQ >}}
 
 
 ### 補充展示 - 運行修復 RHEL 主機設備規則並比對先前報表結果
@@ -109,10 +107,8 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 > 實際展示影片 (請打開`字幕`)
 
-### 展示<2>
+### 展示<2> - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表
 [![展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表](https://img.youtube.com/vi/qTY95XwzhzQ/0.jpg)](https://www.youtube.com/watch?v=qTY95XwzhzQ "展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表")
-
-{{< youtube qTY95XwzhzQ >}}
 
 ## / 結論 /
 
