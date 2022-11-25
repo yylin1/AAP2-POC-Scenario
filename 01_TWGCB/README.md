@@ -20,7 +20,6 @@ TWGCB 由行政院國家資通安全會報技術服務中心發佈，政府組�
       - CIS (Center for Internet Security) RHEL 8 Benchmark
       - DISA(Defense Information Systems Agency) RHEL 8 STIG 以及 TWGCB for RHEL 5 相關內容
       
-    ![](img/01.png) ![](img/02.png)
 
 > 擷取至 [TWGCB-01-008(v1.0)-政府組態基準說明文件](https://download.nccst.nat.gov.tw/attachfilegcb/TWGCB-01-008_Red%20Hat%20Enterprise%20Linux%208%E6%94%BF%E5%BA%9C%E7%B5%84%E6%85%8B%E5%9F%BA%E6%BA%96%E8%AA%AA%E6%98%8E%E6%96%87%E4%BB%B6v1.0_1100924.pdf)
 
@@ -85,7 +84,7 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 > 實際展示影片 (請打開`字幕`)
 
-[![展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表](https://img.youtube.com/vi/XPlo67IBtQw/0.jpg)](https://www.youtube.com/watch?v=XPlo67IBtQw "展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表"
+[![展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表](https://img.youtube.com/vi/XPlo67IBtQw/0.jpg)](https://www.youtube.com/watch?v=XPlo67IBtQw "展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表")
 
 {{< youtube qTY95XwzhzQ >}}
 
