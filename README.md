@@ -12,10 +12,11 @@ Workflow 規劃
     - [ ] 一對多
     - [ ] 多對一
     - [ ] 成功失敗執行說明
+    - [ ] Work with Notifications
 
 - [x] 展示 TWGCB 運行報表 + 修復
 - [ ] AAP2 運行創建 VM ([Link](https://michaelkotelnikov.medium.com/automating-workflow-in-red-hat-virtualization-using-ansible-6dfe5bd4ea1e))
-- [ ] 展示 - AAP2 參數傳遞展示(Link](https://rheb.hatenablog.com/entry/aap_variables_between_jobs))
+- [ ] 展示 - AAP2 參數傳遞展示([Link](https://rheb.hatenablog.com/entry/aap_variables_between_jobs))
     - 透過隨機參數設定主機
     - 大量部署配置節點
 - [ ] 展示 - AAP2 EE 使用外部磁區([Link1](https://www.ansible.com/blog/when-localhost-isnt-what-it-seems-in-red-hat-ansible-automation-platform-2), [Link2](https://rheb.hatenablog.com/entry/aap_store_files))
