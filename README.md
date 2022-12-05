@@ -6,8 +6,49 @@
 2. [Workflow 功能](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/02_Ｗorkflow/README.md)
 3. [Automation Hub 介紹]()
 
+## Scenario
+
+情境 <1> IT 伺服器管理團隊 - 資安稽核 
+```
+VM Temp -> 運行 TWGCB 邏輯檢查 -> 修復 -> 重新進行 TWGCB 邏輯檢查
+```
+情境 <2> IT 日常 Daily Check(帳號巡檢)
+
+```
+AAP2 執行 Daily Check Playbook -> 系統異常：無法連線主機 / 系統正常 -> 報表 + Webhook（mail通知）
+```
+
+情境 <3> 客製化 VM 開發環境
+
+```
+使用者可以自行輸入資源(CPU/Memory)需求 -> 產出對應 VM 開發環境
+```
+
+/補充/填單申請自動化佈屬  
+
+```
+> 環境部署 VM 右鍵設定 VM -> 人工設定 > 作 Approve / 
+```
+
+---
+---
 
 
+- [ ] 展示 - AAP2 參數傳遞展示([Link](https://rheb.hatenablog.com/entry/aap_variables_between_jobs))
+    - [ ] 透過隨機參數設定主機
+    - [ ] 大量部署配置節點
+
+情境 <3> 網路資安
+
+```
+1. Network Automation - Backup and Restore
+2. Network Automation -Infrastructure Awareness
+```
+
+
+
+
+---
 ## 環境介紹
 基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
 
