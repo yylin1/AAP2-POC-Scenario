@@ -1,6 +1,6 @@
 ---
 - name: Update RHEL
-  hosts: rhel
+  hosts: RHEL8a
   become: yes
   gather_facts: yes
 
