@@ -1,0 +1,8 @@
+---
+- name: Check to ensure all pods are in 'running' state
+  assert:
+    that:
+      - '"running" in pod_list.resources[no_of_resources].status.containerStatuses[item].state'
+    fail_msg: "{{ pod_list.resources[no_of_resources].status.containerStatuses[item].name }} is in {{ pod_list.resources[no_of_resources].status.containerStatuses[item].state }} state"
+    success_msg: "{{ pod_list.resources[no_of_resources].status.containerStatuses[item].name }} is in running state"
+  loop: "{{ range(0, pod_list.resources[no_of_resources].status.containerStatuses | length) | list }}"

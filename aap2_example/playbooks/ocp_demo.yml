@@ -1,0 +1,7 @@
+---
+- name: OCP Demo
+  hosts: localhost
+  gather_facts: no
+
+  roles:
+    - ocp_demo
