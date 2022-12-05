@@ -1,6 +1,6 @@
 ---
 - name: Hello World
-  hosts: localhost
+  hosts: RHEL8a
   gather_facts: false
 
   tasks:
