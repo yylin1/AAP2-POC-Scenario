@@ -2,8 +2,16 @@
 
 基於常見需求項目彙整成以下幾個場景:
 
-1. [TWGCB](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/01_TWGCB/README.md)
-2. [Workflow](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/02_Ｗorkflow/README.md)
+1. [AAP 2 結合 TWGCB 實現系統「自動化」合規檢查](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/01_TWGCB/README.md)
+2. [Workflow 功能](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/02_Ｗorkflow/README.md)
+3. [Automation Hub 介紹]()
+
+
+
+## 環境介紹
+基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
+
+
 
 ## TODO
 Workflow 規劃

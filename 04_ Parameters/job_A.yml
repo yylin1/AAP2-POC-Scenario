@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    service_account: ansible
+
+  tasks:
+  - name: store a password for further use
+    set_stats:
+      data:
+        service_account_password: "{{ password_string }}"
+      aggregate: false
+
+  - name: change a password for a service account
+    user:
+      name: "{{ service_account }}"
+      state: present
+      password: "{{ password_string | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+    become: true
