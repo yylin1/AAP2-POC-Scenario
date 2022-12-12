@@ -1,12 +1,38 @@
 # Ansible Automation Platform PoC Scenario
 
+![](https://github.com/ansible/workshops/raw/devel/images/rh-ansible-automation-platform.png)
+
 基於常見需求項目彙整成以下幾個場景:
 
 1. [AAP 2 結合 TWGCB 實現系統「自動化」合規檢查](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/01_TWGCB/README.md)
 2. [Workflow 功能](https://github.com/yylin1/Ansible-POC-Scenario/blob/main/02_Ｗorkflow/README.md)
 3. [Automation Hub 介紹]()
 
+| Demo Name | Description|
+|-----------|------------|
+| [01. Infrastructure Demos](01_Infrastructure/README.md) <br> 展示：服務及開發環境搭建  | 透過標準化的配置將遠程主機或虛擬機實現系統管理任務的自動化|
+| [02. Compliance Demos](01_Infrastructure/README.md)<br> 展示：自動化資安稽核需求 | 透過自動化進行 TWGCB 臺灣政府組態標準合規之邏輯檢查，並產出對應需求報表 |
+| [03. Operation Demos](01_Infrastructure/README.md)<br> 展示：維運團隊管理者日常應用 | 將維運團隊日常系統狀態檢查自動化，包含節點狀態、Agent 服務檢查、使用者檔案權限檢查、多設備憑證到期前提醒，配置排程及日常報表|
+| [04. Network Demos](01_Infrastructure/README.md)<br> 展示：自動化網路開通請求 | 透過自動化開發者與網路團隊之間溝通，將開發者對於連接埠(Port)新增至 Linux 防火牆的例外清單相關需求申請審核並配置運行展演 |
+| [05-Security Demos](01_Infrastructure/README.md)| TBD|
+| [06-Developer Demos](01_Infrastructure/README.md)| TBD|
+
+
+## Set up env
+基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
+
 ## Scenario
+
+
+This is a centralized location for all Ansible Product Demos going forward. 
+
+| Demo Name                                                        | Description                                                                                 |
+|------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| [AAP on CodeReady](aap-on-crc/README.md)                         | Repository and video of how to install Ansible Automation Platform on Code Ready Containers |
+| [Infrastructure Demos](old-demo-repository#infrastructure-demos) | Azure, AWS, Chocolatey, Linux and Windows Demos                                             |
+| [Network Demos](old-demo-repository#network-demos)               | Cisco IOS and F5 Demos                                                                      |
+| [Security Demos](old-demo-repository#security-demos)             | OSCAP and hardening demos                                                                   |
+| [Developer Demos](old-demo-repository#developer-demos)           | Create Reports with Ansible                                                                 |
 
 情境 <1> IT 伺服器管理團隊 - 資安稽核 
 ```
@@ -30,7 +56,9 @@ AAP2 執行 Daily Check Playbook -> 系統異常：無法連線主機 / 系統�
 > 環境部署 VM 右鍵設定 VM -> 人工設定 > 作 Approve / 
 ```
 
----
+## To Use
+
+
 ---
 
 
@@ -50,7 +78,7 @@ AAP2 執行 Daily Check Playbook -> 系統異常：無法連線主機 / 系統�
 
 ---
 ## 環境介紹
-基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
+
 
 
 ## Done
@@ -80,3 +108,27 @@ AAP2 執行 Daily Check Playbook -> 系統異常：無法連線主機 / 系統�
 - [ ] AAP2 運行創建 VM ([Link](https://michaelkotelnikov.medium.com/automating-workflow-in-red-hat-virtualization-using-ansible-6dfe5bd4ea1e))
 
 
+---
+
+# Usage
+
+To run the playbook without committing changes:
+
+```
+ansible-playbook -i network.hosts configure_network.yml -e "commit_changes=0"
+```
+
+To run the playbook committing the changes:
+
+```
+ansible-playbook -i network.hosts configure_network.yml -e "commit_changes=1"
+```
+    
+# Disclaimer
+
+This is just a demo. The final configuration is not meant to be production ready. The playbook and the code displayed here is distributed as it is just for informational purposes. Use it at your own risk.
+
+# Author
+Frank Lin <frank.lin@redhat.com>
+
+## Reference
