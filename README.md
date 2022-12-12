@@ -17,18 +17,9 @@
 ## Set up env
 基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
 
-# Usage
+## Usage
 
 ```
 TBD
 ```
 
-    
-# Disclaimer
-
-This is just a demo. The final configuration is not meant to be production ready. The playbook and the code displayed here is distributed as it is just for informational purposes. Use it at your own risk.
-
-# Author
-Frank Lin <frank.lin@redhat.com>
-
-## Reference
