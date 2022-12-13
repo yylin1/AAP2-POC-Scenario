@@ -17,9 +17,4 @@
 ## Set up env
 基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
 
-## Usage
-
-```
-TBD
-```
-
+> [環境相關說明](00_Lab_Settings/README.md)
