@@ -23,7 +23,7 @@ Service Catalogs > All Services > Management Automation Workshops Demos > AAP2 L
 ![](img/03.png)
 
 
-- 可以透過 VS Code access / Automation controller 進行後續場景POC
+- 可以透過 VS Code access / Automation controller 進行後續場景 POC
 
 
 ![](img/04.png)
