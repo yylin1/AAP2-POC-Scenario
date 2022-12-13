@@ -29,5 +29,11 @@ Service Catalogs > All Services > Management Automation Workshops Demos > AAP2 L
 ![](img/04.png)
 ![](img/05.png)
 
+## 新增 POC Source 來源於 AAP2 Project
+
+![](img/06.png)
+![](img/07.png)
+![](img/08.png)
+
 ## Resource  
 - [How to get access to RHPDS?](https://access.redhat.com/solutions/5160121)
