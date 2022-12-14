@@ -15,6 +15,8 @@
 
 
 ## Set up env
+
+- Ansible Automaiton Platform 
 基於 RHPDS 的 `AAP2 Linux Automation Workshop` 環境。
 
 > [環境相關說明](00_Infrastructure/README.md)

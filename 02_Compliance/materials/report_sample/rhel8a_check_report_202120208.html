@@ -1,0 +1,104 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type=text/css>
+td { border-bottom:1px solid #D8D8D8; }
+tbody tr:nth-child(odd){
+  background-color: #ccffff;
+}
+tbody tr:nth-child(even){
+  background-color: #ccffdd;
+}
+table td.shrink {
+    white-space:nowrap
+}
+</style>
+<script>
+function display(elementid) {
+  var x = document.getElementById(elementid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<body>
+<table border=2 cellspacing='2' cellpadding='3' style='width:100%;
+     font-size:10.0pt; font-family:Verdana; border-collapse:collapse; float:left; word-wrap:break-word;' >
+<tbody>
+<tr style='background-color: #cccfff;'><td colspan="6" class="shrink"> <br><b><center> TWGCB check report - rhel8.example.com </center></b></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><pre>
+Server/System Configuration
+Platform	: RedHat 
+Host Name	: rhel8.example.com 
+IP Address	: 192.168.119.133
+Subnet Mask	: 255.255.255.0
+OS Version	: release 8.4 ( Ootpa ) 
+Kernel Version	: 4.18.0-305.25.1.el8_4.x86_64 
+</pre></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check started at: 2022-02-08 23:45:01 Thursday</b></td></tr>
+
+<tr style='background-color: #C0C0C0;'>
+<td align="center" class="shrink">TWGCB-ID</td>
+<td align="center" class="shrink">檢查結果</td>
+<td align="center" class="shrink">類別</td>
+<td align="center" class="shrink">原則設定名稱</td>
+<td align="center" class="shrink">說明</td>
+<td align="center" class="shrink">備註說明</td>
+</tr>
+<tr>
+<td align="center" class="shrink">TWGCB-01-008-0075</td>
+<td align="center" class="shrink">PASS <a href='#' onclick='display("TWGCB-01-008-0075a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0075a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>PASS => no account name starts with + in /etc/passwd
+</pre>
+</span>
+</td>
+<td align="center" class="shrink">系統設定與維護</td>
+<td align="center" class="shrink">/etc/passwd檔案行首的「+」符號</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0075b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0075b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定/etc/passwd檔案行首是否允許存在「+」符號
+▪  「+」符號代表不需輸入密碼即可從網路資訊服務(NIS)主機取得帳號、密碼、主機名稱或群組等資訊
+▪  當NIS沒有啟動或NIS設定錯誤時，/etc/passwd檔案行首若存在「+」符號，攻擊者可使用帳號「+」與空白密碼登入，提供攻擊者一個獲得系統權限的途徑
+</pre></span>
+</td>
+<td align="center" class="shrink">check account name starts with +</td>
+</tr>
+<tr>
+<td align="center" class="shrink">TWGCB-01-008-0076</td>
+<td align="center" class="shrink">PASS <a href='#' onclick='display("TWGCB-01-008-0076a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0076a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>PASS => no account name starts with + in /etc/shadow
+</pre>
+</span>
+</td>
+<td align="center" class="shrink">系統設定與維護</td>
+<td align="center" class="shrink">/etc/shadow檔案行首的「+」符號</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0076b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0076b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定/etc/shadow檔案行首是否允許存在「+」符號
+▪  「+」符號代表不需輸入密碼即可從網路資訊服務(NIS)主機取得帳號、密碼、主機名稱或群組等資訊
+▪  當NIS沒有啟動或NIS設定錯誤時，/etc/shadow檔案行首若存在「+」符號，攻擊者可使用帳號「+」與空白密碼登入，提供攻擊者一個獲得系統權限的途徑
+</pre></span>
+</td>
+<td align="center" class="shrink">check account password starts with +</td>
+</tr>
+<tr>
+<td align="center" class="shrink">TWGCB-01-008-0078</td>
+<td align="center" class="shrink">PASS <a href='#' onclick='display("TWGCB-01-008-0078a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0078a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>PASS => no user with uid == 0 except ['root', 'npum']
+</pre>
+</span>
+</td>
+<td align="center" class="shrink">系統設定與維護</td>
+<td align="center" class="shrink">UID=0之帳號</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0078b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0078b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定系統除了root帳號外，其他帳號之UID是否允許設為0
+▪  UID=0之帳號具有系統管理權限
+</pre></span>
+</td>
+<td align="center" class="shrink">check 0 uid</td>
+</tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check Ended at: 2022-02-08 23:45:59 Thursday</b></td></tr>
+</tbody></table>
+</body></html>

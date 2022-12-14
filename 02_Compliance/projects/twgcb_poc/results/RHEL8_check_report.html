@@ -1,0 +1,107 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type=text/css>
+td { border-bottom:1px solid #D8D8D8; }
+tbody tr:nth-child(odd){
+  background-color: #ccffff;
+}
+tbody tr:nth-child(even){
+  background-color: #ccffdd;
+}
+table td.shrink {
+    white-space:nowrap
+}
+</style>
+<script>
+function display(elementid) {
+  var x = document.getElementById(elementid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<body>
+<table border=2 cellspacing='2' cellpadding='3' style='width:100%;
+     font-size:10.0pt; font-family:Verdana; border-collapse:collapse; float:left; word-wrap:break-word;' >
+<tbody>
+<tr style='background-color: #cccfff;'><td colspan="6" class="shrink"> <br><b><center> TWGCB check report - serverb.lab.example.com </center></b></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><pre>
+Server/System Configuration
+Platform	: RedHat 
+Host Name	: serverb.lab.example.com 
+IP Address	: 192.168.8.102
+Subnet Mask	: 255.255.254.0
+OS Version	: release 8.5 ( Ootpa ) 
+Kernel Version	: 4.18.0-348.23.1.el8_5.x86_64 
+</pre></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check started at: 2022-12-14 03:35:04 Wednesday</b></td></tr>
+
+<tr style='background-color: #C0C0C0;'>
+<td align="center" class="shrink">TWGCB-ID</td>
+<td align="center" class="shrink">檢查結果</td>
+<td align="center" class="shrink">類別</td>
+<td align="center" class="shrink">原則設定名稱</td>
+<td align="center" class="shrink">說明</td>
+<td align="center" class="shrink">備註說明</td>
+</tr>
+
+<tr style="background-color: #f2acc8">
+<td align="center" class="shrink">TWGCB-01-008-0129</td>
+<td align="center" class="shrink">FAILED <a href='#' onclick='display("TWGCB-01-008-0129a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0129a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>FAILED : modprobe tipc enabled
+</pre>
+</span>
+</td>
+<td align="center" class="shrink">網路設定</td>
+<td align="center" class="shrink">TIPC協定</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0129b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0129b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定是否啟用TIPC協定
+▪  TIPC(Transparent Inter-Process Communication，透通處理程序間通訊)協定提供一個有效率的叢集式通訊協定，提高系統效能、可用性及擴展性
+▪  停用此協定可降低系統被攻擊面
+</pre></span>
+</td>
+<td align="center" class="shrink">check modprobe tipc disabled</td>
+</tr>
+<tr style="background-color: #f2acc8">
+<td align="center" class="shrink">TWGCB-01-008-0130</td>
+<td align="center" class="shrink">FAILED <a href='#' onclick='display("TWGCB-01-008-0130a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0130a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>FAILED : radio wifi enabled
+FAILED : radio wwan enabled</pre>
+</span>
+</td>
+<td align="center" class="shrink">網路設定</td>
+<td align="center" class="shrink">無線網路介面</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0130b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0130b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定是否停用無線網路介面
+▪  若系統不透過無線網路進行連線與提供服務，應將無線網路介面設為停用，確保系統無法透過無線網路進行連線，以降低系統被攻擊面
+</pre></span>
+</td>
+<td align="center" class="shrink">check radio interface disabled</td>
+</tr>
+<tr>
+<td align="center" class="shrink">TWGCB-01-008-0131</td>
+<td align="center" class="shrink">PASS <a href='#' onclick='display("TWGCB-01-008-0131a"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0131a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>PASS : interface not in promisc mode
+</pre>
+</span>
+</td>
+<td align="center" class="shrink">網路設定</td>
+<td align="center" class="shrink">網路介面混雜模式</td>
+<td align="center" class="shrink"><a href='#' onclick='display("TWGCB-01-008-0131b"); return false;'>+detail</a>
+<span id="TWGCB-01-008-0131b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>▪  這項原則設定決定是否啟用網路介面混雜模式
+▪  網路介面若處於混雜模式(promiscuous mode)，即可接收所有經過該網路介面的網路封包
+▪  停用網路介面混雜模式，以避免被攻擊者用於蒐集網路流量數據資料，其中可能包含登入帳號、密碼及金鑰等機敏資訊
+</pre></span>
+</td>
+<td align="center" class="shrink">check interface promisc mode disabled</td>
+</tr>
+
+
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check Ended at: 2022-12-14 03:35:16 Wednesday</b></td></tr>
+</tbody></table>
+</body></html>

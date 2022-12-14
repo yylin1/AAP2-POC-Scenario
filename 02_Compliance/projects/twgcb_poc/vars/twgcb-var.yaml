@@ -1,0 +1,8 @@
+---
+check_mode:
+  "TWGCB-01-008-0129": "{{ commons.check_mode.do_check }}"
+  "TWGCB-01-008-0130": "{{ commons.check_mode.do_check }}"
+  "TWGCB-01-008-0131": "{{ commons.check_mode.do_check }}"
+customer:
+  zero_uid: [ "root" ]
+...

@@ -65,7 +65,7 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 自動化工具需要透過腳本運行，顧問團隊透過訪談及列舉需求，開發出企業客戶所需的專業腳本，企業維運人員透過 UI 介面方便管理者後續操作及工作流程串接，運行後續提供「結果報告」，協助企業釐清當前環境依據 TWGCB Profile 是否符合對應規範及條例，讓企業有檢驗後依據，並能將此報告交由企業內部資安團隊進行後續修正依據。
 
-![](img/03.png)
+![](imagesages/03.png)
 
 ### 展示 - 產出 RHEL 8 主機組態設定檢查報表
 
@@ -79,7 +79,7 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 首先，配置 TWGCB Check Report 於 Ansible Automation Platform 環境，一鍵點選執行就會進行節點 TWGCB 邏輯檢查
 
-![](img/04.png)
+![](images/04.png)
 
 運行後，產出報表呈現包括：
   - 查詢主機狀態 / 時間 / 系統版本 資訊
@@ -87,12 +87,12 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
   - 依據組態基準項目進行 「類別」分類
   - 檔案行首的「+」符號 => 可以確認結果狀態與資訊
 
-![](img/05.png)
+![](images/05.png)
 
 ### 展示<1>- 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表
 > 實際展示影片 (請打開`字幕`)
 
-[![展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表](https://img.youtube.com/vi/XPlo67IBtQw/0.jpg)](https://www.youtube.com/watch?v=XPlo67IBtQw "展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表")
+[![展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表](https://images.youtube.com/vi/XPlo67IBtQw/0.jpg)](https://www.youtube.com/watch?v=XPlo67IBtQw "展示 - 透過 Ansible 結合 TWGCB 實現系統自動化合規檢查並產出報表")
 
 
 ### 補充展示 - 運行修復 RHEL 主機設備規則並比對先前報表結果
@@ -107,15 +107,15 @@ Red Hat Ansible Automation(簡稱 AAP) 可以協助維運團使 IT 環境和流�
 
 首先配置針對 `TWGCB-01-008-0129` 及 `TWGCB-01-008-0130` 條例撰寫對應修復 Task，並且透過 AAP 一鍵運行修復：
 
-![](img/06.png)
+![](images/06.png)
 
 重新運行 `TWGCB Check Report` 後比對邏輯檢查結果，發現條例內容已經做修復，並顯示 PASS 資訊：
-![](img/07.png)
+![](images/07.png)
 
 > 實際展示影片 (請打開`字幕`)
 
 ### 展示<2> - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表
-[![展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表](https://img.youtube.com/vi/qTY95XwzhzQ/0.jpg)](https://www.youtube.com/watch?v=qTY95XwzhzQ "展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表")
+[![展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表](https://images.youtube.com/vi/qTY95XwzhzQ/0.jpg)](https://www.youtube.com/watch?v=qTY95XwzhzQ "展示 - 透過 Ansible 執行修復 TWGCB 邏輯檢查配置並重新執行檢查產生報表")
 
 ## / 結論 /
 

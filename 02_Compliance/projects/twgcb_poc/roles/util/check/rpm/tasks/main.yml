@@ -1,0 +1,58 @@
+---
+
+- name: initial variables
+  set_fact:
+    var_rpm_exists: false
+    rpm_name: ''
+    svc_name: ''
+
+## 1. check RPM exists
+- name: check RPM exists
+  shell: >
+    yum list installed "{{ rpm_name }}"
+  register: result
+  ignore_errors: true
+
+- name: parse result
+  set_fact:
+    var_rpm_exists: "{{ result.rc == 0 }}"
+  when: 
+    - result is defined
+    - result.stdout | default('', true) | trim != ""
+
+## 2. check service enabled and active
+- name: check service status
+  block:
+
+    - name: check systemctl is-enabled
+      shell: >
+        systemctl is-enabled "{{ svc_name }}"
+      register: result
+      ignore_errors: true
+
+    - name: parse result
+      set_fact:
+        var_service_enabled: "{{ result.rc == 0 }}"
+      when: 
+        - result is defined
+        - result.stdout | default('', true) | trim != ""
+
+    ## 3. check service active
+    - name: check systemctl is-active
+      shell: >
+        systemctl is-active "{{ svc_name }}"
+      register: result
+      ignore_errors: true
+
+    - name: parse result
+      set_fact:
+        var_service_active: "{{ result.rc == 0 }}"
+      when: 
+        - result is defined
+        - result.stdout | default('', true) | trim != ""
+
+  when:
+    - var_rpm_exists == true
+    - svc_name | trim != ""
+
+...

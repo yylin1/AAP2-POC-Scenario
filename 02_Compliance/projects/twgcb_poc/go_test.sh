@@ -1,0 +1,1 @@
+ansible-playbook 1_sudo_report.yaml

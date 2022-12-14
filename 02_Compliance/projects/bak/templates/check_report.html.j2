@@ -1,0 +1,76 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type=text/css>
+td { border-bottom:1px solid #D8D8D8; }
+tbody tr:nth-child(odd){
+  background-color: #ccffff;
+}
+tbody tr:nth-child(even){
+  background-color: #ccffdd;
+}
+table td.shrink {
+    white-space:nowrap
+}
+</style>
+<script>
+function display(elementid) {
+  var x = document.getElementById(elementid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<body>
+<table border=2 cellspacing='2' cellpadding='3' style='width:100%;
+     font-size:10.0pt; font-family:Verdana; border-collapse:collapse; float:left; word-wrap:break-word;' >
+<tbody>
+<tr style='background-color: #cccfff;'><td colspan="6" class="shrink"> <br><b><center> CTBC check report - {{ ansible_nodename }} </center></b></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><pre>
+Server/System Configuration
+Platform	: {{ ansible_distribution }} 
+Host Name	: {{ ansible_nodename }} 
+IP Address	: {{ ansible_default_ipv4.address }}
+Subnet Mask	: {{ ansible_default_ipv4.netmask }}
+OS Version	: release {{ ansible_distribution_version }} ( {{ ansible_distribution_release }} ) 
+Kernel Version	: {{ ansible_kernel }} 
+</pre></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check started at: {{ var_start_time }}</b></td></tr>
+
+<tr style='background-color: #C0C0C0;'>
+<td align="center" class="shrink">TWGCB-ID</td>
+<td align="center" class="shrink">檢查結果</td>
+<td align="center" class="shrink">類別</td>
+<td align="center" class="shrink">原則設定名稱</td>
+<td align="center" class="shrink">說明</td>
+<td align="center" class="shrink">備註說明</td>
+</tr>
+
+{% for item in rules %}
+{% if check_status[item.id] == "PASS" %}
+<tr>
+{% elif check_status[item.id] == "BY_PASS" %}
+<tr style="background-color: #ffffff">
+{% else %}
+<tr style="background-color: #f2acc8">
+{% endif %}
+<td align="center" class="shrink">{{ item.id }}</td>
+<td align="center" class="shrink">{{ check_status[item.id] }} <a href='#' onclick='display("{{ item.id }}a"); return false;'>+detail</a>
+<span id="{{ item.id }}a" style='display: none;' align="left">
+<pre style='white-space: pre-wrap;'>{{ check_results[item.id] }}</pre>
+</span>
+</td>
+<td align="center" class="shrink">{{ item.group }}</td>
+<td align="center" class="shrink">{{ item.rule_name }}</td>
+<td align="center" class="shrink"><a href='#' onclick='display("{{ item.id }}b"); return false;'>+detail</a>
+<span id="{{ item.id }}b" style='display: none;' align="left"><pre style='white-space: pre-wrap;'>{{ item.rule_description }}</pre></span>
+</td>
+<td align="center" class="shrink">{{ item.rule_remark }}</td>
+</tr>
+{% endfor %}
+
+
+<tr style='background-color: #ffffff;'><td colspan="6" class="shrink"><b>Check Ended at: {{ var_end_time }}</b></td></tr>
+</tbody></table>
+</body></html>
