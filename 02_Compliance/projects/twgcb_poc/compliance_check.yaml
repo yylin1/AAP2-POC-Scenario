@@ -22,9 +22,9 @@
       include_vars:
         file: vars/rules-var.yaml
 
-    - name: Include vars of ctbc-var.yaml for POC related variables
+    - name: Include vars of twgcb-var.yaml for POC related variables
       include_vars:
-        file: vars/ctbc-var.yaml
+        file: vars/twgcb-var.yaml
 
     # create default worker node status dictionary variable
     - name: create default dictionary variable
