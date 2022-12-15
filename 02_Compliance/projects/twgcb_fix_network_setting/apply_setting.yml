@@ -18,14 +18,14 @@
     - name: change directory permissions
       copy: src=./disable_tipc.sh dest=./disable_tipc.sh mode=0775
     
-    - name: Change modprobe tipc disabled
+    - name: change modprobe tipc disabled
       command: sh disable_tipc.sh
 
     # Apply TWGCB-01-008-0130 Rule
-    - name: Change radio interface disabled
-      shell: nmcli radio wifi off
+    - name: change radio interface disabled
+      shell: "nmcli radio wifi off"
 	  
     # Apply TWGCB-01-008-0131 Rule 
-    - name: Change interface promisc mode disabled
-      shell: promisc off
+    - name: change interface promisc mode disabled
+      shell: "promisc off"
     
