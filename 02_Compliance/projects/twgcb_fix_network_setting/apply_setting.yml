@@ -14,12 +14,12 @@
   gather_facts: true
   become: true
   tasks:
-    # Apply TWGCB-01-008-0129 Rule
-    - name: change directory permissions
-      copy: src=./disable_tipc.sh dest=./disable_tipc.sh mode=0775
+    # # Apply TWGCB-01-008-0129 Rule
+    # - name: change directory permissions
+    #   copy: src=./disable_tipc.sh dest=./disable_tipc.sh mode=0775
     
-    - name: change modprobe tipc disabled
-      command: sh disable_tipc.sh
+    # - name: change modprobe tipc disabled
+    #   command: sh disable_tipc.sh
 
     # Apply TWGCB-01-008-0130 Rule
     - name: change radio interface disabled
