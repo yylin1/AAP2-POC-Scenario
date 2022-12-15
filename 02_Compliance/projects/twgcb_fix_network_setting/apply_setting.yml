@@ -24,10 +24,10 @@
 
     # Apply TWGCB-01-008-0130 Rule
     - name: change radio interface disabled
-      shell: "nmcli radio wifi off"
+      shell: nmcli radio wifi off
       ignore_errors: yes
-      
+
     # Apply TWGCB-01-008-0131 Rule 
     - name: change interface promisc mode disabled
-      shell: "promisc off"
+      shell: promisc off
       ignore_errors: yes
