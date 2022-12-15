@@ -17,6 +17,7 @@
     rule_id: "TWGCB-01-008-0129"
     rule_status: ""
     illegal_zero_uid: []
+    ANSIBLE_CONTROLLER_NODE_IP_ADDRESS: ""
   tasks:
     - name: Include vars of rules-var.yaml for twgcb common variables
       include_vars:
@@ -247,6 +248,6 @@
         src: check_report.html.j2
         dest: "/tmp/{{ now(fmt='%Y%m%d_%H%M') }}_{{ inventory_hostname }}_check_report.html"
         mode: '0644'
-      delegate_to: {ANSIBLE_CONTROLLER_NODE_IP_ADDRESS}
+      delegate_to: "{{ ANSIBLE_CONTROLLER_NODE_IP_ADDRESS }}"
 
 ...
