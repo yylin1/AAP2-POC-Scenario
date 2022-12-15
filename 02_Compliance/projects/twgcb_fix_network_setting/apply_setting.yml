@@ -16,14 +16,18 @@
     # Apply TWGCB-01-008-0129 Rule
     - name: change directory permissions
       copy: src=./disable_tipc.sh dest=./disable_tipc.sh mode=0775
+      ignore_errors: yes
 
     - name: change modprobe tipc disabled
       command: sh disable_tipc.sh
+      ignore_errors: yes
 
     # Apply TWGCB-01-008-0130 Rule
     - name: change radio interface disabled
       shell: "nmcli radio wifi off"
-      
+      ignore_errors: yes
+
     # Apply TWGCB-01-008-0131 Rule 
     - name: change interface promisc mode disabled
       shell: "promisc off"
+      ignore_errors: yes
