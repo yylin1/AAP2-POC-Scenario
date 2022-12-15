@@ -1,1 +1,0 @@
-ansible-playbook 2_system_check.yaml
