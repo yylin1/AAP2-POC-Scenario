@@ -245,8 +245,8 @@
       become: no
       template:
         src: check_report.html.j2
-        dest: "/tmp/{{ inventory_hostname }}_check_report.html"
+        dest: "/tmp/{{ now(fmt='%Y%m%d_%H%M') }}_{{ inventory_hostname }}_check_report.html"
         mode: '0644'
-      delegate_to: 192.168.8.104
+      delegate_to: {ANSIBLE_CONTROLLER_NODE_IP_ADDRESS}
 
 ...
