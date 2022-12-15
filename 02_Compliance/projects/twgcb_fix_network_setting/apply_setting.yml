@@ -24,7 +24,7 @@
 
     # Apply TWGCB-01-008-0130 Rule
     - name: change radio interface disabled
-      shell: nmcli radio wifi off
+      shell: nmcli radio wifi off & nmcli radio wwan off
       ignore_errors: yes
 
     # Apply TWGCB-01-008-0131 Rule
