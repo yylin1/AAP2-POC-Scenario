@@ -19,10 +19,10 @@
       copy: src=./disable_tipc.sh dest=./disable_tipc.sh mode=0775
     
     - name: Change modprobe tipc disabled
-      command: sh ./disable_tipc.sh
+      command: sh disable_tipc.sh
 
     # Apply TWGCB-01-008-0130 Rule
-    - name: Download Apache tarball file
+    - name: Change radio interface disabled
       shell: nmcli radio wifi off
 	  
     # Apply TWGCB-01-008-0131 Rule 
