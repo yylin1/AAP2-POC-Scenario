@@ -1,0 +1,56 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type=text/css>
+td { border-bottom:1px solid #D8D8D8; }
+tbody tr:nth-child(odd){
+  background-color: #ccffff;
+}
+tbody tr:nth-child(even){
+  background-color: #ccffdd;
+}
+table td.shrink {
+    word-wrap:break-word
+}
+</style>
+<script>
+function display(elementid) {
+  var x = document.getElementById(elementid);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<body>
+<table border=2 cellspacing='2' cellpadding='3' style='table-layout:fixed;
+     font-size:10.0pt; font-family:Verdana; border-collapse:collapse; float:left; word-wrap:break-word;' >
+<tbody>
+<tr style='background-color: #cccfff;'><td colspan="2" class="shrink"> <br><b><center> CTBC sudo report - {{ ansible_nodename }} </center></b></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="2" class="shrink"><pre>
+Server/System Configuration
+Platform	: {{ ansible_distribution }} 
+Host Name	: {{ ansible_nodename }} 
+IP Address	: {{ ansible_default_ipv4.address }}
+Subnet Mask	: {{ ansible_default_ipv4.netmask }}
+OS Version	: release {{ ansible_distribution_version }} ( {{ ansible_distribution_release }} ) 
+Kernel Version	: {{ ansible_kernel }} 
+</pre></td></tr>
+<tr style='background-color: #ffffff;'><td colspan="2" class="shrink"><b>Check started at: {{ var_start_time }}</b></td></tr>
+
+<tr style='background-color: #C0C0C0;'>
+<td align="center" class="shrink" width="15%">檔名</td>
+<td align="center" class="shrink" width="75%" style="word-wrap:break-word;">內容</td>
+</tr>
+
+{% for item in sudoer_files %}
+<tr>
+<td align="left" class="shrink" width="15%">{{ item }}</td>
+<td align="left" class="shrink" width="75%" style="word-wrap:break-word;">{{ file_content[item] }}</td>
+</tr>
+{% endfor %}
+
+
+<tr style='background-color: #ffffff;'><td colspan="2" class="shrink" width="100%"><b>Check Ended at: {{ var_end_time }}</b></td></tr>
+</tbody></table>
+</body></html>

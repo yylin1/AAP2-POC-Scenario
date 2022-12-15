@@ -1,0 +1,38 @@
+---
+commons:
+  check_mode:
+    do_check: "do_check"
+    by_pass: "by_pass"
+  check_status:
+    pass: "PASS"
+    fail: "FAILED"
+    by_pass: "BY_PASS"
+
+rules:
+  - id: "TWGCB-01-008-0129"
+    group: "網路設定"
+    rule_name: "TIPC協定"
+    rule_description: |
+      ▪  這項原則設定決定是否啟用TIPC協定
+      ▪  TIPC(Transparent Inter-Process Communication，透通處理程序間通訊)協定提供一個有效率的叢集式通訊協定，提高系統效能、可用性及擴展性
+      ▪  停用此協定可降低系統被攻擊面
+    rule_remark: "check modprobe tipc disabled"
+
+  - id: "TWGCB-01-008-0130"
+    group: "網路設定"
+    rule_name: "無線網路介面"
+    rule_description: |
+      ▪  這項原則設定決定是否停用無線網路介面
+      ▪  若系統不透過無線網路進行連線與提供服務，應將無線網路介面設為停用，確保系統無法透過無線網路進行連線，以降低系統被攻擊面
+    rule_remark: "check radio interface disabled"
+
+  - id: "TWGCB-01-008-0131"
+    group: "網路設定"
+    rule_name: "網路介面混雜模式"
+    rule_description: |
+      ▪  這項原則設定決定是否啟用網路介面混雜模式
+      ▪  網路介面若處於混雜模式(promiscuous mode)，即可接收所有經過該網路介面的網路封包
+      ▪  停用網路介面混雜模式，以避免被攻擊者用於蒐集網路流量數據資料，其中可能包含登入帳號、密碼及金鑰等機敏資訊
+    rule_remark: "check interface promisc mode disabled"
+
+...

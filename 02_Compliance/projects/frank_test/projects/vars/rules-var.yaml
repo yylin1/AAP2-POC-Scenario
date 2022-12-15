@@ -1,0 +1,37 @@
+---
+commons:
+  check_mode:
+    do_check: "do_check"
+    by_pass: "by_pass"
+  check_status:
+    pass: "PASS"
+    fail: "FAILED"
+    by_pass: "BY_PASS"
+
+rules:
+  - id: "TWGCB-01-008-0075"
+    group: "系統設定與維護"
+    rule_name: "/etc/passwd檔案行首的「+」符號"
+    rule_description: |
+      ▪  這項原則設定決定/etc/passwd檔案行首是否允許存在「+」符號
+      ▪  「+」符號代表不需輸入密碼即可從網路資訊服務(NIS)主機取得帳號、密碼、主機名稱或群組等資訊
+      ▪  當NIS沒有啟動或NIS設定錯誤時，/etc/passwd檔案行首若存在「+」符號，攻擊者可使用帳號「+」與空白密碼登入，提供攻擊者一個獲得系統權限的途徑
+    rule_remark: "check account name starts with +"
+
+  - id: "TWGCB-01-008-0076"
+    group: "系統設定與維護"
+    rule_name: "/etc/shadow檔案行首的「+」符號"
+    rule_description: |
+      ▪  這項原則設定決定/etc/shadow檔案行首是否允許存在「+」符號
+      ▪  「+」符號代表不需輸入密碼即可從網路資訊服務(NIS)主機取得帳號、密碼、主機名稱或群組等資訊
+      ▪  當NIS沒有啟動或NIS設定錯誤時，/etc/shadow檔案行首若存在「+」符號，攻擊者可使用帳號「+」與空白密碼登入，提供攻擊者一個獲得系統權限的途徑
+    rule_remark: "check account password starts with +"
+    
+  - id: "TWGCB-01-008-0078"
+    group: "系統設定與維護"
+    rule_name: "UID=0之帳號"
+    rule_description: |
+      ▪  這項原則設定決定系統除了root帳號外，其他帳號之UID是否允許設為0
+      ▪  UID=0之帳號具有系統管理權限
+    rule_remark: "check 0 uid"
+...

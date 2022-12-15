@@ -1,0 +1,71 @@
+---
+#################################################
+#
+# code : 5_win_sa_agent_install.yaml
+# function : install SA(opsware) software in Windows 2016
+# author : Leo Chen (weijchen@redhat.com)
+# author : Howard Wu (howwu@redhat.com)
+# version : 0.1
+# update : 2022/02/15
+#
+#################################################
+
+### task part
+- hosts: all
+  gather_facts: true
+  # become: true
+  vars:
+    install_cmd: ""
+    opsware_agent_filename: ""
+    opsware_agent_win2016: "opsware-agent-75.0.88359.0-win32-6.2-X64"
+  tasks:
+    # set opsware agent in windows 2016
+    - name: set opsware agent in windows 2016
+      set_fact:
+         opsware_agent_filename: "{{ opsware_agent_win2016 }}"
+      # when : 
+      #   - ansible_os_family == "RedHat"
+      #   - ansible_distribution_version[0:1]|int == 7
+
+    - debug:
+        var: opsware_agent_filename
+
+    # upload SA agent to working folder
+    - name: upload SA agent {{ opsware_agent_filename }}
+      win_copy:
+        src: files/{{ opsware_agent_filename }}
+        # dest: "%TEMP%/{{ opsware_agent_filename }}"
+        dest: "%TEMP%/{{ opsware_agent_filename }}.bat"
+
+    # upload certificate file to working folder
+    - name: upload certificate file agent.srv
+      win_copy:
+        src: files/agent.srv
+        dest: "%TEMP%/agent.srv"
+
+    # set install command
+    - name: set install command
+      set_fact:
+        # install_cmd: "%TEMP%/{{ opsware_agent_filename }} --opsw_gw_addr 172.24.47.78:3001 --force_new_device"
+        install_cmd: "{{ opsware_agent_filename }}.bat --opsw_gw_addr 172.24.47.78:3001 --force_new_device"
+
+    - debug: 
+        var: install_cmd
+
+    # install opsware_agent
+    - name: install opsware_agent
+      win_command: "{{ install_cmd }}"
+      args:
+        chdir: "%TEMP%"
+      register: install_result
+    
+    - debug:
+        var: install_result
+
+    # enable and start system service Opsware Agent
+    - name: enable and start system service Opsware Agent
+      win_service:
+        name: "Opsware Agent"
+        start_mode: auto
+        state: started
+... 

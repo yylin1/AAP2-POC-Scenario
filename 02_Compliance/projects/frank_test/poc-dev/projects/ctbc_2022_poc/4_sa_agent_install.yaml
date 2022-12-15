@@ -1,0 +1,82 @@
+---
+#################################################
+#
+# code : 4_sa_agent_install.yaml
+# function : install SA(opsware) software in RHEL 7 and 8
+# author : Leo Chen (weijchen@redhat.com)
+# author : Howard Wu (howwu@redhat.com)
+# version : 0.1
+# update : 2022/02/15
+#
+#################################################
+
+### task part
+- hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    install_cmd: ""
+    opsware_agent_filename: ""
+    opsware_agent_rhel7: "opsware-agent-75.0.88359.0-linux-7SERVER-X86_64"
+    opsware_agent_rhel8: "opsware-agent-75.0.88359.0-linux-RHEL8-X86_64"
+  tasks:
+    # set opsware agent in RHEL 8
+    - name: set opsware agent in RHEL 8
+      set_fact:
+         opsware_agent_filename: "{{ opsware_agent_rhel8 }}"
+      when : 
+        - ansible_os_family == "RedHat"
+        - ansible_distribution_version[0:1]|int == 8
+    
+    # set opsware agent in RHEL 7
+    - name: set opsware agent in RHEL 7
+      set_fact:
+         opsware_agent_filename: "{{ opsware_agent_rhel7 }}"
+      when : 
+        - ansible_os_family == "RedHat"
+        - ansible_distribution_version[0:1]|int == 7
+
+    - debug:
+        var: opsware_agent_filename
+
+    # upload SA agent to working folder
+    - name: upload SA agent {{ opsware_agent_filename }}
+      copy:
+        src: files/{{ opsware_agent_filename }}
+        dest: "{{ opsware_agent_filename }}"
+        owner: root
+        group: root
+        mode: '0755'
+
+    # upload certificate file to working folder
+    - name: upload certificate file agent.srv
+      copy:
+        src: files/agent.srv
+        dest: agent.srv
+        owner: root
+        group: root
+        mode: '0644'
+
+    # set install command
+    - name: set install command
+      set_fact:
+        install_cmd: "./{{ opsware_agent_filename }} --opsw_gw_addr 172.24.47.78:3001 --force_new_device"
+
+    - debug: 
+        var: install_cmd
+
+    # install opsware_agent
+    - name: install opsware_agent
+      shell: "{{ install_cmd }}"
+      register: install_result
+    
+    - debug:
+        var: install_result
+
+    # enable and start system service opsware-agent
+    - name: enable and start system service opsware-agent
+      systemd:
+        name: opsware-agent.service
+        state: restarted
+        enabled: yes
+... 

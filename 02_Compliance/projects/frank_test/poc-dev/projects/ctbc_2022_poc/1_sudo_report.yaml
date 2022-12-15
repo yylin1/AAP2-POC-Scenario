@@ -1,0 +1,64 @@
+---
+#################################################
+#
+# code : 2_system_check.yaml
+# function : check RHEL by CTBC rules
+# author : Howard Wu (howwu@redhat.com)
+# author : Leo Chen (weijchen@redhat.com)
+# version : 0.1
+# update : 2022/02/10
+#
+#################################################
+
+### task part
+- hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    sudoer_files: []
+    file_content: []
+  tasks:
+    - name: set start time
+      set_fact:
+        var_start_time: "{{ now(fmt='%F %T %A') }}"
+
+    - name: Get file list
+      find: 
+        paths: /etc/sudoers.d
+      register: filelist
+    
+    - name: Init report content
+      set_fact: 
+         sudoer_files: "{{ sudoer_files | combine({ item.path : '' }) }}"
+      with_items:
+        - "{{filelist.files}}"
+
+    - name: Get file content
+      shell: 
+        cat {{ item.path }}
+      register: result
+      with_items:
+        - "{{filelist.files}}"
+
+    - name: Format output
+      set_fact:
+        file_content: "{{ file_content | combine({ item.item.path : item.stdout  | replace('\n', '<br/>') }) }}"
+      with_items:
+        - "{{ result.results }}"
+
+    - debug:
+        var: sudoer_files
+
+    - name: set end time
+      set_fact:
+        var_end_time: "{{ now(fmt='%F %T %A') }}"
+
+    - name: Create reports
+      become: no
+      template:
+        src: sudo_report.html.j2
+        dest: "/tmp/{{ inventory_hostname }}_sudo_report.html"
+        mode: '0644'
+      delegate_to: 192.168.8.104
+
+...

@@ -1,0 +1,4 @@
+[all]
+#rhel8a  ansible_host=192.168.0.180    ansible_user=ansible_user
+rhel8b  ansible_host=192.168.0.185    ansible_user=ansible_user
+win2016 ansible_host=192.168.119.135 ansible_connection=winrm ansible_port=5985 ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_user=Administrator ansible_password=1qaz@WSX

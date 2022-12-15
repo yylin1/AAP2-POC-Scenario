@@ -1,0 +1,64 @@
+---
+#
+# TWGCB-01-008-0032-1
+#
+
+# - debug:
+#     var: item
+
+- name: Get repo file name
+  set_fact:
+    var_full_repo: "{{ item.split(':')[0] }}" 
+    var_repo: "{{ item.split(':')[0].split('/')[-1] }}" 
+    var_section: "{{ item.split(':')[1] | replace('[','') | replace(']','') }}" 
+
+- name: fetch repo files
+  fetch:
+    src:  "{{ var_full_repo }}"
+    dest: "{{ var_repo }}"
+    flat: yes
+
+# - debug:
+#     msg: "{{ "repo:" + var_repo + ", " + "section:" + var_section + ", repo full file:" + var_full_repo }}
+
+- name: Get gpgcheck value in the "{{ var_section }}" section in "{{ var_repo }}" file
+  set_fact:
+    result_gpgcheck: "{{ lookup('ini', 'gpgcheck section={{var_section}} file={{var_repo}} default=0') }}"
+    result_enabled:  "{{ lookup('ini', 'enabled  section={{var_section}} file={{var_repo}} default=1') }}"
+  ignore_errors: true
+
+- name: parse result - PASS (enabled=1 and gpgcheck=1)
+  set_fact:
+    var_status_boolean: "{{ true and var_status_boolean|bool }}"
+    var_result: |
+      {{ var_result }}
+      PASS : {{ '[' + var_section + '] gpgcheck=' + result_gpgcheck + ', enabled=' + result_enabled + ' in /etc/yum.repos.d/' + var_repo  }}
+  when: 
+    - result_enabled is defined and result_gpgcheck is defined
+    - result_enabled  == "1"
+    - result_gpgcheck == "1"
+
+- name: parse result - PASS (enabled=0 and gpgcheck=[0|1])
+  set_fact:
+    var_status_boolean: "{{ true and var_status_boolean|bool }}"
+    var_result: |
+      {{ var_result }}
+      PASS : {{ '[' + var_section + '] gpgcheck=' + result_gpgcheck + ', enabled=' + result_enabled + ' in /etc/yum.repos.d/' + var_repo }}
+  when: 
+    - result_enabled is defined
+    - result_enabled  == "0"
+
+- name: parse result - FAIL (enabled=1 and gpgcheck=0)
+  set_fact:
+    var_status_boolean: "{{ false and var_status_boolean|bool }}"
+    var_result: |
+      {{ var_result }}
+      FAILED : {{ '[' + var_section + '] gpgcheck=' + result_gpgcheck + ', enabled=' + result_enabled + ' in /etc/yum.repos.d/' + var_repo  }}
+  when: 
+    - result_enabled is defined and result_gpgcheck is defined
+    - result_enabled  == "1"
+    - result_gpgcheck == "0"
+
+# - debug:
+#     msg: "{{ var_repo + '[' + var_section + '] gpgcheck=' + result_gpgcheck + ', enabled=' + result_enabled }}"
+...

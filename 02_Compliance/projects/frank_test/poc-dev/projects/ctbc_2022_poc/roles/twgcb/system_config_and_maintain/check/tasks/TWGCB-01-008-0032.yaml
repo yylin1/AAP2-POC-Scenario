@@ -1,0 +1,59 @@
+---
+#
+# TWGCB-01-008-0032
+#
+
+# check step
+# 1. check gpgcheck=1 in /etc/yum.conf
+# 2. get repo files in /etc/yum.repos.d/*.repo
+# 3. in one repo file
+# 3.1. get all sections
+# 3.2. check gpgcheck=1 in one section when enabled=1 or not set enabled
+- name: initial variables
+  set_fact:
+    var_status: "{{ (rule_status == commons.check_mode.by_pass) | ternary(commons.check_status.by_pass, '') }}"
+    var_status_boolean: true
+    var_result: "{{ (rule_status == commons.check_mode.by_pass) | ternary('N/A', '') }}"
+
+# - debug:
+#     msg: "{{ rule_id + ':' + rule_status + ':' + var_status + ':' + var_result }}"
+
+- name: check block
+  block:
+    ## get /etc/yum.repos.d/*.repo list
+    - name: Get repo file list in /etc/yum.repos.d/*.repo
+      shell: grep -rH '^\[.*\]$' /etc/yum.repos.d/*.repo
+      register: var_repo_section
+
+    - name: add /etc/yum.conf to repo list
+      set_fact:
+        var_repo_section: "{{ var_repo_section  | default({}) | combine({ 'stdout_lines' : ['/etc/yum.conf:[main]'] + var_repo_section.stdout_lines }) }}"
+
+    - debug:
+        var: var_repo_section
+
+    # recursive pass one repo file with one section to sub task
+    - name: recursive check each section in each repo file
+      include_tasks: TWGCB-01-008-0032-1.yaml
+      with_items: "{{ var_repo_section.stdout_lines }}"
+
+    - name: set result status
+      set_fact:
+        var_status: "{{ (var_status_boolean == true) | ternary(commons.check_status.pass, commons.check_status.fail) }}"
+
+    # - debug:
+    #     msg: "after in {{ rule_id + ':' + var_status + ':' + var_result }}"
+
+  when:
+    - rule_status == commons.check_mode.do_check
+
+# - debug:
+#     msg: "after {{ rule_id + ':' + var_status + ':' + var_result }}"
+
+- name: Pass check results to role
+  include_role:
+    name: util/check/update_result
+  vars:
+    rule_status: "{{ var_status }}"
+    rule_result: "{{ var_result }}"
+...

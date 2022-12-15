@@ -1,0 +1,46 @@
+---
+#################################################
+#
+# code : 4_sa_agent_uninstall.yaml
+# function : uninstall SA(opsware) software in RHEL 7 and 8
+# author : Leo Chen (weijchen@redhat.com)
+# author : Howard Wu (howwu@redhat.com)
+# version : 0.1
+# update : 2022/02/15
+#
+#################################################
+
+### task part
+- hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    uninstall_cmd: "/bin/bash /opt/opsware/agent/bin/agent_uninstall.sh --force"
+    remove_folder_cmd: "rm -rf /opt/opsware/agent /etc/opt/opsware/agent /var/opt/opsware/agent /var/log/opsware/agent"
+    uninstall_result: ""
+  tasks:
+    # stop system service opsware-agent
+    - name: stop system service opsware-agent
+      systemd:
+        name: opsware-agent.service
+        state: stopped
+      # ignore_errors: true
+    
+    # uninstall opsware_agent with force mode
+    - name: uninstall opsware_agent in force mode
+      shell: "{{ uninstall_cmd }}"
+      register: uninstall_result
+      # ignore_errors: true
+    
+    - debug:
+        var: uninstall_result
+
+    # remove folder with command
+    - name: remove folder with command
+      shell: "{{ remove_folder_cmd }}"
+      register: uninstall_result
+      # ignore_errors: true
+
+    - debug:
+        var: uninstall_result
+... 

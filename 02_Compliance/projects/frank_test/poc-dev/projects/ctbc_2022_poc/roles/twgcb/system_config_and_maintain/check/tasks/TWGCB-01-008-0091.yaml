@@ -1,0 +1,63 @@
+---
+#
+# TWGCB-01-008-0091
+#
+
+# check step
+# 1. check user in shadow group
+- name: initial variables
+  set_fact:
+    var_status: "{{ (rule_status == commons.check_mode.by_pass) | ternary(commons.check_status.by_pass, '') }}"
+    var_result: "{{ (rule_status == commons.check_mode.by_pass) | ternary('N/A', '') }}"
+
+# - debug:
+#     msg: "{{ rule_id + ':' + rule_status + ':' + var_status + ':' + var_result }}"
+
+- name: check block
+  block:
+    - name: check user in shadow group
+      shell: >
+        awk -F: '($1=="shadow") {print $NF}' /etc/group;
+      register: result
+      ignore_errors: true
+
+    - debug:
+        var: result
+
+    - name: parse result - PASS
+      set_fact:
+        var_status: "{{ commons.check_status.pass }}"
+        var_result: |
+          PASS => no user in shadow group
+      when: 
+        - result is defined
+        - result.rc == 0
+        - result.stdout | default('', true) | trim == ""
+    
+    - name: parse result - FAIL
+      set_fact:
+        var_status: "{{ commons.check_status.fail }}"
+        var_result: |
+          FAILED => user found in shadow group
+          {{ result.stdout }}
+      when: 
+        - result is defined
+        - result.rc == 0
+        - result.stdout | default('', true) | trim != ""
+
+    # - debug:
+    #     msg: "after in {{ rule_id + ':' + var_status + ':' + var_result }}"
+
+  when:
+    - rule_status == commons.check_mode.do_check
+
+# - debug:
+#     msg: "after {{ rule_id + ':' + var_status + ':' + var_result }}"
+
+- name: Pass check results to role
+  include_role:
+    name: util/check/update_result
+  vars:
+    rule_status: "{{ var_status }}"
+    rule_result: "{{ var_result }}"
+...
