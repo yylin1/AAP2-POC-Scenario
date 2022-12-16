@@ -6,5 +6,6 @@
 - 注意事項：TBD
 
 
-
-
+## Reference:
+    - https://www.ansiblepilot.com/articles/create-a-vmware-vsphere-virtual-machine-ansible-module-vmware_guest/
+    - https://github.com/lucab85/ansible-pilot/
