@@ -1,0 +1,27 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+#  - name: Print all facts
+#    debug:
+#      var: ansible_facts
+
+  - name: Extend volume group rhel with /dev/sdb
+    lvg:
+      vg: rhel
+      pvs: /dev/sda3,/dev/sdb
+    when: ansible_facts['devices']['sdb'] is defined
+
+  - name: Extend the logical volume to consume all remaining space in the volume group
+    lvol:
+      vg: rhel
+      lv: root
+      size: +100%FREE
+    when: ansible_facts['devices']['sdb'] is defined
+
+  - name: Resize the root filesystem
+    filesystem:
+      fstype: xfs
+      dev: /dev/mapper/rhel-root
+      resizefs: yes
+    when: ansible_facts['devices']['sdb'] is defined

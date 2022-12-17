@@ -5,7 +5,15 @@
 - 環境需求：vmware
 - 注意事項：注意帳號密碼
 
+## Workflow
+![](images/01.png)
+
+## 表單
+![](images/02.png)
+
+
 
 ## Reference:
     - https://www.ansiblepilot.com/articles/create-a-vmware-vsphere-virtual-machine-ansible-module-vmware_guest/
     - https://github.com/lucab85/ansible-pilot/
+    - https://github.com/ZioGuillo/vm-vsphere-ansible
