@@ -1,0 +1,92 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    vcenter_server: "IP_ADDRESS"
+    vcenter_user: "ansible@vsphere.local"
+    vcenter_pass: "PASSWORD"
+    datacenter_name: "Datacenter"
+    cluster_name: "cluster"
+    datastore: "XXXXXX-XX"
+  tasks:
+  - name: Create New VM
+    vmware_guest:
+      hostname: "{{ vcenter_server }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: False
+      name: "{{ vm_name }}"
+      template: RHEL8TEMPLATE
+      datacenter: "{{ datacenter_name }}"
+      datastore: "{{ datastore }}"
+#      folder: /Leon/Practice
+      folder: /Redhat
+      state: poweredoff
+      cluster: "{{ cluster_name }}"
+      wait_for_ip_address: no
+      guest_id: "{{ vm_name }}"
+      hardware:
+        memory_mb: "{{ memory_mb }}"
+        num_cpus: "{{ num_cpus }}"
+      networks:
+      - name: "{{ vlan_name }}"
+        ip: "{{ guest_ip }}"
+        netmask: 255.255.255.0
+        gateway: "{{ guest_gateway }}"
+      customization:
+        dns_servers:
+          - "{{ dns_server }}"
+
+  - name: add disk to VM
+    vmware_guest_disk:
+      hostname: "{{ vcenter_server }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: no
+      datacenter: "{{ datacenter_name }}"
+#      folder: /Leon/Practice
+      folder: /Redhat
+      name: "{{ vm_name }}"
+      disk:
+        - size_gb: "{{ SDB_SIZE }}"
+          type: thin
+          datastore: "{{ datastore }}"
+          state: present
+          scsi_controller: 1
+          unit_number: 1
+          scsi_type: 'paravirtual'
+    when: "{{ SDB_SIZE }} != 0"
+
+  - name: Power on the VM
+    vmware_guest:
+      hostname: "{{ vcenter_server }}"
+      username: "{{ vcenter_user }}"
+      password: "{{ vcenter_pass }}"
+      validate_certs: False
+      name: "{{ vm_name }}"
+      template: RHEL8TEMPLATE
+      datacenter: "{{ datacenter_name }}"
+      datastore: "{{ datastore }}"
+#      folder: /Leon/Practice
+      folder: /Redhat
+      state: poweredon
+      cluster: "{{ cluster_name }}"
+      wait_for_ip_address: yes
+      guest_id: "{{ vm_name }}"
+      hardware:
+        memory_mb: "{{ memory_mb }}"
+        num_cpus: "{{ num_cpus }}"
+      networks:
+      - name: "{{ vlan_name }}"
+        ip: "{{ guest_ip }}"
+        netmask: 255.255.255.0
+        gateway: "{{ guest_gateway }}"
+      customization:
+        dns_servers:
+          - "{{ dns_server }}"
+
+
+  - name: Write dynamic inventory variable
+    copy:
+      content: "{{ guest_ip }}"
+      dest: /dynamic-script/inventory
