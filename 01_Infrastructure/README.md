@@ -50,7 +50,7 @@
 - DNS >> dns_server
 - disk size >> SDB_SIZE
 
-新增Survey時有兩點要注意
+新增Survey時有兩點要特別注意
 
 1. Survey需要再Workflow內新增而不是從JT裡面新增Survey
 
