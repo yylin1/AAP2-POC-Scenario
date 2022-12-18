@@ -2,12 +2,12 @@
 - hosts: localhost
   gather_facts: no
   vars:
-    vcenter_server: "IP_ADDRESS"
+    vcenter_server: "10.9.45.34"
     vcenter_user: "ansible@vsphere.local"
-    vcenter_pass: "PASSWORD"
+    vcenter_pass: "P@ssw0rd"
     datacenter_name: "Datacenter"
     cluster_name: "cluster"
-    datastore: "XXXXXX-XX"
+    datastore: "ME4024-7T"
   tasks:
   - name: Create New VM
     vmware_guest:
@@ -19,7 +19,6 @@
       template: RHEL8TEMPLATE
       datacenter: "{{ datacenter_name }}"
       datastore: "{{ datastore }}"
-#      folder: /Leon/Practice
       folder: /Redhat
       state: poweredoff
       cluster: "{{ cluster_name }}"
@@ -44,7 +43,6 @@
       password: "{{ vcenter_pass }}"
       validate_certs: no
       datacenter: "{{ datacenter_name }}"
-#      folder: /Leon/Practice
       folder: /Redhat
       name: "{{ vm_name }}"
       disk:
@@ -67,7 +65,6 @@
       template: RHEL8TEMPLATE
       datacenter: "{{ datacenter_name }}"
       datastore: "{{ datastore }}"
-#      folder: /Leon/Practice
       folder: /Redhat
       state: poweredon
       cluster: "{{ cluster_name }}"
