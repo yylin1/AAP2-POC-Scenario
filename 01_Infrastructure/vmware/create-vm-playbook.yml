@@ -2,12 +2,12 @@
 - hosts: localhost
   gather_facts: no
   vars:
-    vcenter_server: "10.9.45.34"
+    vcenter_server: "192.168.1.1"
     vcenter_user: "ansible@vsphere.local"
-    vcenter_pass: "P@ssw0rd"
+    vcenter_pass: "XXXXXX"
     datacenter_name: "Datacenter"
     cluster_name: "cluster"
-    datastore: "ME4024-7T"
+    datastore: "XXXXXXX"
   tasks:
   - name: Create New VM
     vmware_guest:
