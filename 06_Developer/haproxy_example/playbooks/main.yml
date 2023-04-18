@@ -1,0 +1,13 @@
+- name: 'Deploy Web'
+  hosts: haproxy
+  gather_facts: no
+  any_errors_fatal: true
+  vars_files:
+    - "{{ inventory_dir }}/vars/all.yml"
+  tasks:        
+    ## Set Up HA Proxy
+    - name: 'Set Up HA Proxy'
+      import_tasks: ./tasks/set_up_haproxy_task.yml
+      tags:
+      - setup_haproxy
+  
