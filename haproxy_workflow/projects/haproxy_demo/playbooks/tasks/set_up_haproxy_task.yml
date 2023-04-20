@@ -1,0 +1,17 @@
+### Independent Task File
+## Description: Set Up HA Proxy.
+## Extra Variables Needed: None
+##-----------------------------------------------------------
+  - name: 'Generate haproxy.cfg'
+    template:
+      dest: "/etc/haproxy/haproxy.cfg"
+      src:  "haproxy-template.cfg"
+
+  - name: 'Restart HAProxy'
+    service:
+      name: "haproxy"
+      state: restarted
+
+  
+
+ 

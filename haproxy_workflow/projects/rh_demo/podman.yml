@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: yes
+
+  tasks:
+  - name: Copy Script to Podman Server
+    copy:
+      src: script/RunPodman.sh
+      dest: /tmp/RunPodman.sh
+     # dest: /OpenShift-trigger/podman/RunPodman.sh
+  - name: Run Podman's script
+    shell: |
+      sh /tmp/RunPodman.sh
+    register: script_result
+  - name: Print Result
+    debug:
+      msg: "{{ script_result.stdout_lines }}"

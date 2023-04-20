@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Run Podman's script
+    shell: |
+      sh /root/ansible/script/RunRESTAPI2.sh
+    register: script_result
+  - name: Print Result
+    debug:
+      msg: "{{ script_result.stdout_lines }}"

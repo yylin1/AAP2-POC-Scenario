@@ -1,0 +1,78 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+
+  tasks:
+#############################################################################################################
+    - name: "TWGCB-01-008-0209"
+      command: "cat /etc/pam.d/system-auth"
+      register: result_systemauth
+      changed_when: False
+    - name: "TWGCB-01-008-0209"
+      command: "cat /etc/pam.d/password-auth"
+      register: result_passwordauth
+      changed_when: False
+##############################################################################################################
+    - name: "TWGCB-01-008-0209 (1) Update Value to /etc/authselect/system-auth"
+      replace:
+        dest: /etc/pam.d/system-auth
+        regexp: (password\s+requisite\s+)(.*)?$
+        replace: \1\2 enforce_for_root
+      when: "'enforce_for_root' not in result_systemauth.stdout"
+    - name: "TWGCB-01-008-0209 (2) Update Value to /etc/authselect/password-auth"
+      replace:
+        dest: /etc/pam.d/password-auth
+        regexp: (password\s+requisite\s+)(.*)?$
+        replace: \1\2 enforce_for_root
+      when: "'enforce_for_root' not in result_passwordauth.stdout"
+
+
+
+    - name: "TWGCB-01-008-0210 Update Value to /etc/security/pwquality.conf: minlen"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# minlen \= '
+        line: "minlen = 12"
+
+
+    - name: "TWGCB-01-008-0211 Update Value to /etc/security/pwquality.conf: minclass"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# minclass \= '
+        line: "minclass = 4"
+
+
+    - name: "TWGCB-01-008-0212 Update Value to /etc/security/pwquality.conf: dcredit"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# dcredit \= '
+        line: "dcredit = -1"
+
+
+    - name: "TWGCB-01-008-0213 Update Value to /etc/security/pwquality.conf: ucredit"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# ucredit \= '
+        line: "ucredit = -1"
+    
+
+    - name: "TWGCB-01-008-0214 Update Value to /etc/security/pwquality.conf: lcredit"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# lcredit \= '
+        line: "lcredit = -1"
+
+
+    - name: "TWGCB-01-008-0215 Update Value to /etc/security/pwquality.conf: ocredit"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# ocredit \= '
+        line: "ocredit = -1"
+
+    - name: "TWGCB-01-008-0219 Update Value to /etc/security/pwquality.conf: dictcheck"
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: '# dictcheck \= '
+        line: "dictcheck = 1"
+

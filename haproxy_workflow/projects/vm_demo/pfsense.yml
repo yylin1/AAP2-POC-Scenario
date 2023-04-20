@@ -1,0 +1,31 @@
+# - action
+#   The action of the rule
+#   (Choices: pass, block, match, reject)[Default: pass]
+#   type: str
+# - protocol
+#   The protocol
+#   (Choices: any, tcp, udp, tcp/udp, icmp, igmp, ospf, esp, ah, gre, pim, sctp, pfsync, carp)[Default: any]
+#   type: str
+# - {action: ,src: ,src_port: ,dest: ,dest_port: ,protocol: }--------->src_port & dest_port??????
+---
+- hosts: pfsense  
+  # vars:
+  #   rules:
+  #     - {action: pass,protocol: tcp,src: 10.107.158.38,dest: 10.107.65.241,dest_port: 9999}
+  #     - {action: block,protocol: udp,src: 10.107.65.241,dest: 10.107.158.38,dest_port: 10000}
+      
+
+  tasks:
+  - name: "Add Internal traffic rules"
+    pfsensible.core.pfsense_rule:
+      name: " {{ src }} traffic to {{ dest }}"
+      action: "pass"
+      interface: wan
+      ipprotocol: inet
+      protocol: "{{ protocol}}"
+      source: "{{ src }}"
+      # source_port: "{{ src_port }}"
+      destination: "{{ dest }}"
+      destination_port: "{{ dest_port }}"
+      state: present           #present, absent
+    # loop: "{{ rules }}"

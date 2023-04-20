@@ -1,0 +1,31 @@
+### Independent Task File
+## Description: Set Up HA Proxy.
+## Extra Variables Needed: None
+##-----------------------------------------------------------
+  - name: 'Generate haproxy.cfg'
+    template:
+      dest: "/etc/haproxy/haproxy.cfg"
+      src:  "{{ inventory_dir }}/templates/haproxy-template.cfg"
+  
+  ## VIP 可能在別台 Node，需要讓 HA Proxy 允許綁定在不存在的 IP，不然 HA Proxy 會無法啟動
+  - name: 'Allow OS to bind the IP which is not exist'
+    lineinfile:
+      path: /etc/sysctl.conf
+      line: "net.ipv4.ip_nonlocal_bind=1"
+      insertbefore: EOF
+    tags: sysctl  
+    
+  - name: 'Reload sysctl Configuration'
+    shell:
+      sysctl -f /etc/sysctl.conf
+    tags: sysctl
+
+  - name: 'Restart HA Proxy'
+    systemd:
+      name: haproxy
+      state: restarted
+      enabled: yes
+
+  
+
+ 

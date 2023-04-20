@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+  labels:
+    app: my-pod
+  namespace: webservice-demo
+spec:
+  containers:
+    - name: pacman
+      image: 'docker.io/georgechiu/pacman:latest'
+      ports:
+        - containerPort: 8080

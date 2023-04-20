@@ -1,0 +1,15 @@
+###------------- Global Configuration --------------
+    web_ssl_enable: false
+    
+    ###--------------- HA Proxy Configuration ----------
+    ### VIP Information
+    ## Do not attach these VIPs manually. Keepalived will handle these VIPs and attach them to the specific 
+    ## interface automatically.
+    ## The same VIP or interface for different services is supported.
+    haproxy_public_vip_web: "10.107.88.65"    ## web VIP for public network access.
+    haproxy_public_vip_web_netmask: "20"
+    haproxy_public_vip_web_interface: "ens192" ## The interface that VIP will be attached to.
+    
+    #haproxy_vip_mariadb: "10.0.0.229"    ## VIP for MariaDB Galera Cluster.
+    #haproxy_vip_mariadb_netmask: "24"
+    #haproxy_vip_mariadb_interface: "ens19" ## The interface that VIP will be attached to.

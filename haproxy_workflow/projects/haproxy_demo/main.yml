@@ -1,0 +1,27 @@
+- name: 'Deploy Web'
+  hosts: haproxy
+  gather_facts: no
+  any_errors_fatal: true
+#  vars_files:
+#    - "vars/all.yml"
+  
+  vars:
+    web_ssl_enable: false
+    haproxy_public_vip_web: "10.107.65.38"    ## web VIP for public network access.
+    haproxy_public_vip_web_netmask: "20"
+    haproxy_public_vip_web_interface: "ens192" ## The interface that VIP will be attached to.
+
+
+  tasks:        
+    ## Set Up HA Proxy
+    - name: 'Generate haproxy.cfg'
+      template:
+        dest: "/etc/haproxy/haproxy.cfg"
+        #       dest: "./haproxy/haproxy.cfg" 
+        src:  "haproxy-template.cfg"
+
+    - name: 'Restart HAProxy'
+      service:
+        name: "haproxy"
+        state: restarted
+

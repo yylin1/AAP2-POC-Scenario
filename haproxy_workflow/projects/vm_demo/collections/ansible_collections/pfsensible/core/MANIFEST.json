@@ -1,0 +1,35 @@
+{
+ "collection_info": {
+  "namespace": "pfsensible",
+  "name": "core",
+  "version": "0.4.2",
+  "authors": [
+   "Orion Poplawski",
+   "Frederic Bor",
+   "taylor vories",
+   "Jan Wenzel"
+  ],
+  "readme": "README.md",
+  "tags": [
+   "pfsense"
+  ],
+  "description": "Core modules for managing pfSense",
+  "license": [
+   "GPL-3.0-or-later"
+  ],
+  "license_file": null,
+  "dependencies": {},
+  "repository": "https://github.com/pfsensible/core",
+  "documentation": "https://github.com/pfsensible/core/wiki",
+  "homepage": "https://github.com/pfsensible/core",
+  "issues": "https://github.com/pfsensible/core/issues"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "6dee63834792599b3eb67460f7e7a2040dd2f4324832cbc944ce492994279a7c",
+  "format": 1
+ },
+ "format": 1
+}

@@ -1,0 +1,47 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+##VMware Server 登入設定
+    vmware:
+    vmserver_host: '{{ lookup("env", "VMWARE_HOST") }}'
+    vmserver_pwd: '{{ lookup("env", "VMWARE_PASSWORD") }}'
+    vmserver_user: '{{ lookup("env", "VMWARE_USER") }}'
+##模板存放位置資訊
+    template_name: Template_RHEL8
+    #template_name: Template_RHEL8_249_0
+    template_esxi_hostname: x3850x5-204-10.107.65.204
+    template_datacenter: Datacenter
+    template_folder: Ansible
+
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: "{{ vmserver_host }}"
+      username: "{{ vmserver_user }}"
+      password: "{{ vmserver_pwd }}"
+      validate_certs: False
+      name: "{{vm_name}}"
+      template: "{{ template_name }}"
+      esxi_hostname: "{{ template_esxi_hostname }}"
+      datacenter: "{{ template_datacenter }}"
+      folder: "{{ template_folder }}"
+      hardware:
+         memory_mb: "{{vm_memory}}"
+         num_cpus: "{{vm_cpu}}"
+      networks:
+      - name: "{{ vm_nic }}"
+        type: static
+        connected: yes
+        start_connected: yes
+        ip: "{{vm_ip}}"
+        netmask: "{{vm_netmask}}"
+        gateway: "{{vm_gateway}}"
+        dns_servers: "{{vm_dns}}"
+      state: poweredon
+      wait_for_ip_address: true
+    register: result
+  - name: Print
+    debug:
+      msg: "{{result}}"
